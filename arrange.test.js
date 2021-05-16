@@ -29,3 +29,17 @@ test('arrange with waitFirst', () => {
     expect(output).toBe('Start to commit\nTom is notified\n');
   }, 10000);
 });
+
+test('arrange with nothing', (done) => {
+  let output = '';
+  console['log'] = (log) => { output += log; };
+  arrange('Tom');
+  setTimeout(() => {
+    expect(output).toBe('');
+    done();
+  }, 1000);
+});
+
+test('arrange with error', () => {
+  expect(arrange).toThrow('need a name to notify');
+});
